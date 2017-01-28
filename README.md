@@ -5,6 +5,10 @@ DuckQuack è un semplice ambiente per sperimentare in [Ruby](https://www.ruby-la
 È scritto in [JRuby](http://jruby.org/) per consentire una maggior portabilità grazie alla piattaforma Java su cui viene eseguito.
 L'interfaccia usa le [JavaFx](http://docs.oracle.com/javase/8/javafx/api/toc.htm) come libreria di appoggio.
 
+È scaricabile liberamente da: [DuckQuack](https://github.com/minimalprocedure/DuckQuack/archive/master.zip) mentre il codice sorgente è consultabile oltre che nel pacchetto scaricato anche online su [Github](https://github.com/minimalprocedure/DuckQuack).
+
+l'archivio *zip* contiene uno script di shell per Gnu/Linux ed un eseguibile per Microsoft Windows(tm) (non testato).
+
 L'ambiente è diviso in tre parti: *il codice*, un *canvas* aperto su cui si può immediatamente disegnare, un'area di *output* testuale.
 
 ![immagine1](./images/img1.png)
@@ -88,7 +92,7 @@ Sono presenti alcune primitive per la creazione di interfacce grafiche all'inter
 + ```show_main_stage``` (mostra la finestra principale)
 + ... (fare riferimento al file ```app/helpers/running_code_helpers.rb``` e alla cartella ```modules```, nonché al file di localizzazione dentro ```config/locale/<lingua>/locale.yml```).
 
-La documentazione rdoc generata è nella cartella ```doc```.
+La documentazione *rdoc* generata è nella cartella ```doc```.
 Ogni nome di funzione aggiunta nei vari modi è localizzabile nel suo nome con i meccanismi accennati prima.
 Ovviamente tutto questo salvo bachi.
 

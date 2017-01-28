@@ -83,8 +83,8 @@ booleans:
   - 'true'
   - 'false'
 strings:
-  - '''.*'''
-  - '".*"'
+  - '''\S+'''
+  - '"\S+"'
 comments:
   - '#.*$'
 multiline_comments:
