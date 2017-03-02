@@ -46,6 +46,16 @@ import javafx.scene.control.ProgressBar
 import javafx.scene.control.ProgressIndicator
 import javafx.scene.web.HTMLEditor
 import javafx.scene.control.TextInputDialog
+import javafx.scene.shape.Sphere
+import javafx.scene.shape.Box
+import javafx.scene.shape.Cylinder
+import javafx.scene.shape.MeshView
+import javafx.scene.shape.Mesh
+import javafx.scene.shape.TriangleMesh
+import javafx.scene.paint.PhongMaterial
+import javafx.scene.PerspectiveCamera
+import javafx.scene.control.Slider
+import javafx.scene.transform.Rotate
 
 module CodeRunningHelpers
 

@@ -16,7 +16,6 @@ import javafx.scene.layout.HBox
 import org.fxmisc.richtext.LineNumberFactory
 
 class SourceCodeController
-
   attr_reader :code_area
   attr_reader :gutter
   attr_reader :syntax_highlighter
@@ -26,9 +25,9 @@ class SourceCodeController
   LINE_NUMBER_STYLE = 'linenumber'
   LINE_SYMBOL_STYLE = 'linesymbol'
 
-  def initialize(code_area, code_area_info)    
+  def initialize(code_area, code_area_info)
     @code_area = code_area
-    @code_area_info = code_area_info    
+    @code_area_info = code_area_info
     prepare_editing
   end
 
@@ -54,7 +53,7 @@ class SourceCodeController
         SymbolFactory.new(@code_area, SyntaxHighlighter::LINE_ERROR_STYLE, LINE_SYMBOL_STYLE).apply(line)
       )
       @gutter.set_alignment(Pos::CENTER_LEFT)
-      @gutter.get_children[0].get_style_class.add(LINE_NUMBER_STYLE)      
+      @gutter.get_children[0].get_style_class.add(LINE_NUMBER_STYLE)
       @gutter
     }
   end
@@ -72,7 +71,7 @@ class SourceCodeController
     end
   end
   private :substitutions_regex
-  
+
   def saved?
     @code_area.get_undo_manager.at_marked_position_property.get
   end
@@ -80,7 +79,7 @@ class SourceCodeController
   def changed?
     !saved?
   end
-  
+
   def code_text_get
     @code_area.get_text
   end
@@ -94,9 +93,9 @@ class SourceCodeController
     info(:language => @language.capitalize)
     code
   end
-  
+
   def preprocess_code
-    code = find_language    
+    code = find_language
     app.build_ast(code, substitutions_regex).each { |a|
       code.gsub!(Regexp.new('\b'+ a[1] +'\b'), a[0].to_s)
     }
@@ -115,8 +114,8 @@ class SourceCodeController
       #{@source}
       #{postamble})
     logger.debug("\nBEGIN CODE (#{@language}):\n#{code}\nEND CODE")
-    {:code => code, :preamble_size => syntax_code['preamble'].size, :postamble_size => syntax_code['postamble'].size} 
-  end 
+    {:code => code, :preamble_size => syntax_code['preamble'].size, :postamble_size => syntax_code['postamble'].size}
+  end
 
   def code_set(code)
     @code_area.replaceText(0, @code_area.get_length, code)
@@ -126,5 +125,5 @@ class SourceCodeController
   def empty?
     @code_area.get_length <= 0
   end
-  
+
 end

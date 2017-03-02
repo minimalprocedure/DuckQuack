@@ -89,7 +89,7 @@ class DuckQuackController
 
   def code_editor_keys_filter
     @code_editor.add_event_filter(KeyEvent::KEY_PRESSED) { |ev|
-      @current_key_code = ev.get_code 
+      @current_key_code = ev.get_code
       if @current_key_code == KeyCode::TAB
         @code_editor.insert_text(@code_editor.get_caret_position, app.configs.fetch2([:tab_chars], '  '))
         ev.consume
@@ -105,7 +105,11 @@ class DuckQuackController
       @code_editor.insert_text(pos, completes[c])
       @code_editor.selectRange(pos + 1, pos + 1)
     else
-      @code_editor.insert_text(pos, c)
+      selection = @code_editor.get_selection
+      @code_editor.replaceText(
+        selection.get_start, selection.get_end, '') if selection.get_length > 0
+      #@code_editor.insert_text(pos, c)
+      @code_editor.insert_text(selection.get_start, c)
     end
   end
   private :complete_char
@@ -125,7 +129,7 @@ class DuckQuackController
       is_controls_pressed =
         ev.is_alt_down ||
         ev.is_control_down ||
-        ev.is_meta_down || 
+        ev.is_meta_down ||
         @current_key_code == KeyCode::ESCAPE ||
         @current_key_code == KeyCode::DELETE
       is_char_empty = c.chomp.empty?
@@ -242,21 +246,19 @@ class DuckQuackController
 
   def save_open_dialog(action = :open)
     java_import javafx.stage.FileChooser
-    fileChooser = FileChooser.new
+    file_chooser = FileChooser.new
     file = case action
            when :open
-             fileChooser.title = app.t(:load_file).capitalize
-             fileChooser.show_open_dialog(app.stage)
+             file_chooser.title = app.t(:load_file).capitalize
+             file_chooser.show_open_dialog(app.stage)
            when :save
-             fileChooser.title = app.t(:save_file).capitalize
-             savefile = fileChooser.show_open_dialog(app.stage)
+             file_chooser.title = app.t(:save_file).capitalize
+             savefile = file_chooser.show_open_dialog(app.stage)
              if File.exist?(savefile.to_s)
                alert = Alert.new(Alert::AlertType::CONFIRMATION, app.t(:are_you_sure_to_overwrite).capitalize)
                alert.show_and_wait.filter { |response| response == ButtonType::CANCEL }.ifPresent { |_response| savefile = '' }
-               savefile
-             else
-               savefile
              end
+             savefile
            end
     file.to_s
   end

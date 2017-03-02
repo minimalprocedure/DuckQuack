@@ -9,15 +9,27 @@
 module JavafxHelpers
 
   ##
-  # Reset 
+  # Reset
 
   def reset
     children = @container.get_children
-    (children.reduce([]) { |acc, child|       
+    (children.reduce([]) { |acc, child|
        acc << child unless child.get_id == 'default_canvas'; acc}
     ).each { |child| children.remove(child)}
     @canvas.clear
     System.gc
+  end
+
+  def group_objects(objects = [], opts = {})
+    params = {
+      :parent => nil
+    }.deep_merge(opts)
+    g = Group.new
+    objects.each { |o|
+      g.get_children.add(o)
+    }
+    control_add(g, :parent => params[:parent], :bounds => false)
+    g
   end
 
   def ask(caption = '')
@@ -26,7 +38,7 @@ module JavafxHelpers
     d.setHeaderText(caption)
     result = ''
     d.show_and_wait
-    .if_present { |response| result = response }
+      .if_present { |response| result = response }
     result
   end
 
@@ -45,27 +57,27 @@ module JavafxHelpers
     alert.header_text = caption
     result = false
     alert.show_and_wait
-    .filter { |response| response == ButtonType::OK }
-    .if_present { |response| result = true}
+      .filter { |response| response == ButtonType::OK }
+      .if_present { |response| result = true}
     result
   end
 
   def set_control_dimension(c, width, height)
     unless c.nil? && width.nil? && height.nil?
       set_dim_width, set_dim_height =
-        if c.respond_to?(:set_fit_width)
-          [lambda { |w| c.set_fit_width(w) }, lambda { |h| c.set_fit_height(h) }]
-        elsif c.respond_to?(:set_pref_width)
-          [lambda { |w| c.set_pref_width(w) }, lambda { |h| c.set_pref_height(h) }]
-        elsif c.respond_to?(:set_width)
-          [lambda { |w| c.set_width(w) }, lambda { |h| c.set_height(h) }]
-        elsif c.respond_to?(:set_min_width)
-          [lambda { |w| c.set_min_width(w) }, lambda { |h| c.set_min_height(h) }]
-        elsif c.respond_to?(:set_max_width)
-          [lambda { |w| c.set_min_width(w) }, lambda { |h| c.set_min_height(h) }]
-        else
-          [lambda { |w| logger.warn("CONTROL WIDTH #{w} UNSUPPORTED")}, lambda { |h| logger.warn("CONTROL HEIGHT #{h} UNSUPPORTED")}]
-        end
+                     if c.respond_to?(:set_fit_width)
+                       [lambda { |w| c.set_fit_width(w) }, lambda { |h| c.set_fit_height(h) }]
+                     elsif c.respond_to?(:set_pref_width)
+                       [lambda { |w| c.set_pref_width(w) }, lambda { |h| c.set_pref_height(h) }]
+                     elsif c.respond_to?(:set_width)
+                       [lambda { |w| c.set_width(w) }, lambda { |h| c.set_height(h) }]
+                     elsif c.respond_to?(:set_min_width)
+                       [lambda { |w| c.set_min_width(w) }, lambda { |h| c.set_min_height(h) }]
+                     elsif c.respond_to?(:set_max_width)
+                       [lambda { |w| c.set_min_width(w) }, lambda { |h| c.set_min_height(h) }]
+                     else
+                       [lambda { |w| logger.warn("CONTROL WIDTH #{w} UNSUPPORTED")}, lambda { |h| logger.warn("CONTROL HEIGHT #{h} UNSUPPORTED")}]
+                     end
       set_dim_width.call(width)
       set_dim_height.call(height)
     end
@@ -103,6 +115,25 @@ module JavafxHelpers
     c.relocate(params[:x], params[:y])
     set_control_dimension(c, params[:fit_width], params[:fit_height])
     c.set_on_action(block) if block_given?
+    control_add(c, :parent => params[:parent], :bounds => true)
+    c
+  end
+
+  def slider_create( opts = {}, &block)
+    params = {
+      :x => 0,
+      :y => 0,
+      :min => 0,
+      :max => 100,
+      :position => 0,
+      :fit_width => 100,
+      #:fit_height => 100,
+      :parent => nil
+    }.deep_merge(opts)
+    c = Slider.new(params[:min], params[:max], params[:position])
+    c.relocate(params[:x], params[:y])
+    set_control_dimension(c, params[:fit_width], params[:fit_height])
+    c.value_property.add_listener(block) if block_given?
     control_add(c, :parent => params[:parent], :bounds => true)
     c
   end
@@ -182,7 +213,7 @@ module JavafxHelpers
     c
   end
 
-    def progress_indicator_create(opts = {})
+  def progress_indicator_create(opts = {})
     params = {
       :x => 0,
       :y => 0,
@@ -344,5 +375,5 @@ module JavafxHelpers
   def get_screen_bounds
     Screen.get_bounds
   end
-  
+
 end

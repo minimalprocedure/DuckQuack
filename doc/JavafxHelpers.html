@@ -8,6 +8,7 @@
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
 </script>
 
 <script src="./js/jquery.js"></script>
@@ -83,6 +84,8 @@
     
     <li ><a href="#method-i-gets">#gets</a>
     
+    <li ><a href="#method-i-group_objects">#group_objects</a>
+    
     <li ><a href="#method-i-html_editor_create">#html_editor_create</a>
     
     <li ><a href="#method-i-image_view_create">#image_view_create</a>
@@ -104,6 +107,8 @@
     <li ><a href="#method-i-set_control_tooltip">#set_control_tooltip</a>
     
     <li ><a href="#method-i-show_main_stage">#show_main_stage</a>
+    
+    <li ><a href="#method-i-slider_create">#slider_create</a>
     
     <li ><a href="#method-i-text_area_create">#text_area_create</a>
     
@@ -171,7 +176,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="alert-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 36</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">alert</span>(<span class="ruby-identifier">caption</span>, <span class="ruby-identifier">message</span>)
   <span class="ruby-identifier">alert</span> = <span class="ruby-constant">Alert</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Alert</span><span class="ruby-operator">::</span><span class="ruby-constant">AlertType</span><span class="ruby-operator">::</span><span class="ruby-constant">INFORMATION</span>, <span class="ruby-identifier">message</span>)
   <span class="ruby-identifier">alert</span>.<span class="ruby-identifier">header_text</span> = <span class="ruby-identifier">caption</span>
@@ -206,14 +211,14 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="alert_and_wait-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 42</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">alert_and_wait</span>(<span class="ruby-identifier">caption</span>, <span class="ruby-identifier">message</span>)
   <span class="ruby-identifier">alert</span> = <span class="ruby-constant">Alert</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Alert</span><span class="ruby-operator">::</span><span class="ruby-constant">AlertType</span><span class="ruby-operator">::</span><span class="ruby-constant">INFORMATION</span>, <span class="ruby-identifier">message</span>, <span class="ruby-constant">ButtonType</span><span class="ruby-operator">::</span><span class="ruby-constant">CANCEL</span>, <span class="ruby-constant">ButtonType</span><span class="ruby-operator">::</span><span class="ruby-constant">OK</span>)
   <span class="ruby-identifier">alert</span>.<span class="ruby-identifier">header_text</span> = <span class="ruby-identifier">caption</span>
   <span class="ruby-identifier">result</span> = <span class="ruby-keyword">false</span>
   <span class="ruby-identifier">alert</span>.<span class="ruby-identifier">show_and_wait</span>
-  .<span class="ruby-identifier">filter</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">response</span><span class="ruby-operator">|</span> <span class="ruby-identifier">response</span> <span class="ruby-operator">==</span> <span class="ruby-constant">ButtonType</span><span class="ruby-operator">::</span><span class="ruby-constant">OK</span> }
-  .<span class="ruby-identifier">if_present</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">response</span><span class="ruby-operator">|</span> <span class="ruby-identifier">result</span> = <span class="ruby-keyword">true</span>}
+    .<span class="ruby-identifier">filter</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">response</span><span class="ruby-operator">|</span> <span class="ruby-identifier">response</span> <span class="ruby-operator">==</span> <span class="ruby-constant">ButtonType</span><span class="ruby-operator">::</span><span class="ruby-constant">OK</span> }
+    .<span class="ruby-identifier">if_present</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">response</span><span class="ruby-operator">|</span> <span class="ruby-identifier">result</span> = <span class="ruby-keyword">true</span>}
   <span class="ruby-identifier">result</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -245,14 +250,14 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="ask-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 22</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ask</span>(<span class="ruby-identifier">caption</span> = <span class="ruby-string">&#39;&#39;</span>)
   <span class="ruby-identifier">d</span> = <span class="ruby-constant">TextInputDialog</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">d</span>.<span class="ruby-identifier">set_title</span>(<span class="ruby-identifier">app</span>.<span class="ruby-identifier">t</span>(<span class="ruby-value">:ask_caption</span>))
   <span class="ruby-identifier">d</span>.<span class="ruby-identifier">setHeaderText</span>(<span class="ruby-identifier">caption</span>)
   <span class="ruby-identifier">result</span> = <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-identifier">d</span>.<span class="ruby-identifier">show_and_wait</span>
-  .<span class="ruby-identifier">if_present</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">response</span><span class="ruby-operator">|</span> <span class="ruby-identifier">result</span> = <span class="ruby-identifier">response</span> }
+    .<span class="ruby-identifier">if_present</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">response</span><span class="ruby-operator">|</span> <span class="ruby-identifier">result</span> = <span class="ruby-identifier">response</span> }
   <span class="ruby-identifier">result</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -284,7 +289,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="audio_clip_create-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 250</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 281</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">audio_clip_create</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">opts</span> = {})
   <span class="ruby-identifier">params</span> = {
     <span class="ruby-value">:protocol</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:file</span>,
@@ -325,7 +330,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="button_create-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 93</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">button_create</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">opts</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">params</span> = {
     <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
@@ -370,7 +375,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="canvas_create-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 109</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">canvas_create</span>(<span class="ruby-identifier">opts</span> = {})
   <span class="ruby-identifier">params</span> = {
     <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
@@ -426,7 +431,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="close_main_stage-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 304</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 335</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">close_main_stage</span>
   <span class="ruby-identifier">app</span>.<span class="ruby-identifier">stage</span>.<span class="ruby-identifier">hide</span>
 <span class="ruby-keyword">end</span></pre>
@@ -459,7 +464,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="control_add-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 77</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">control_add</span>(<span class="ruby-identifier">control</span>, <span class="ruby-identifier">opts</span> = {})
   <span class="ruby-identifier">params</span> = {
     <span class="ruby-value">:parent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>,
@@ -504,7 +509,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="get_screen_bounds-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 343</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 374</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_screen_bounds</span>
   <span class="ruby-constant">Screen</span>.<span class="ruby-identifier">get_bounds</span>
 <span class="ruby-keyword">end</span></pre>
@@ -537,9 +542,50 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="gets-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 32</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">gets</span>(<span class="ruby-identifier">caption</span> = <span class="ruby-string">&#39;&#39;</span>)
   <span class="ruby-identifier">ask</span>(<span class="ruby-identifier">caption</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-group_objects" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">group_objects</span><span
+            class="method-args">(objects = [], opts = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="group_objects-source">
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">group_objects</span>(<span class="ruby-identifier">objects</span> = [], <span class="ruby-identifier">opts</span> = {})
+  <span class="ruby-identifier">params</span> = {
+    <span class="ruby-value">:parent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>
+  }.<span class="ruby-identifier">deep_merge</span>(<span class="ruby-identifier">opts</span>)
+  <span class="ruby-identifier">g</span> = <span class="ruby-constant">Group</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">objects</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">g</span>.<span class="ruby-identifier">get_children</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">o</span>)
+  }
+  <span class="ruby-identifier">control_add</span>(<span class="ruby-identifier">g</span>, <span class="ruby-value">:parent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:parent</span>], <span class="ruby-value">:bounds</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">g</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -570,7 +616,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="html_editor_create-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 215</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 246</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">html_editor_create</span>(<span class="ruby-identifier">opts</span> = {})
   <span class="ruby-identifier">params</span> = {
     <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
@@ -614,7 +660,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="image_view_create-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 230</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 261</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">image_view_create</span>(<span class="ruby-identifier">image</span>, <span class="ruby-identifier">opts</span> = {})
   <span class="ruby-identifier">params</span> = {
     <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
@@ -663,7 +709,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="label_create-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 136</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 167</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">label_create</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">opts</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">action</span>)
   <span class="ruby-identifier">params</span> = {
     <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
@@ -708,7 +754,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="media_player_create-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 262</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 293</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">media_player_create</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">opts</span> = {})
   <span class="ruby-identifier">params</span> = {
     <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
@@ -758,7 +804,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="print_canvas-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 312</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 343</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">print_canvas</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">opts</span> = {})
   <span class="ruby-identifier">params</span> = {
     <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
@@ -799,7 +845,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="progress_bar_create-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 168</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 199</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">progress_bar_create</span>(<span class="ruby-identifier">opts</span> = {})
   <span class="ruby-identifier">params</span> = {
     <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
@@ -844,8 +890,8 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="progress_indicator_create-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 184</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">progress_indicator_create</span>(<span class="ruby-identifier">opts</span> = {})
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 215</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">progress_indicator_create</span>(<span class="ruby-identifier">opts</span> = {})
   <span class="ruby-identifier">params</span> = {
     <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
     <span class="ruby-value">:y</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
@@ -892,7 +938,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
             <pre><span class="ruby-comment"># File javafx_helpers.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset</span>
   <span class="ruby-identifier">children</span> = <span class="ruby-ivar">@container</span>.<span class="ruby-identifier">get_children</span>
-  (<span class="ruby-identifier">children</span>.<span class="ruby-identifier">reduce</span>([]) { <span class="ruby-operator">|</span><span class="ruby-identifier">acc</span>, <span class="ruby-identifier">child</span><span class="ruby-operator">|</span>       
+  (<span class="ruby-identifier">children</span>.<span class="ruby-identifier">reduce</span>([]) { <span class="ruby-operator">|</span><span class="ruby-identifier">acc</span>, <span class="ruby-identifier">child</span><span class="ruby-operator">|</span>
      <span class="ruby-identifier">acc</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">child</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">child</span>.<span class="ruby-identifier">get_id</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;default_canvas&#39;</span>; <span class="ruby-identifier">acc</span>}
   ).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">child</span><span class="ruby-operator">|</span> <span class="ruby-identifier">children</span>.<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">child</span>)}
   <span class="ruby-ivar">@canvas</span>.<span class="ruby-identifier">clear</span>
@@ -927,23 +973,23 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="set_control_dimension-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 52</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_control_dimension</span>(<span class="ruby-identifier">c</span>, <span class="ruby-identifier">width</span>, <span class="ruby-identifier">height</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">width</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">height</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-identifier">set_dim_width</span>, <span class="ruby-identifier">set_dim_height</span> =
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:set_fit_width</span>)
-        [<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_fit_width</span>(<span class="ruby-identifier">w</span>) }, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_fit_height</span>(<span class="ruby-identifier">h</span>) }]
-      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:set_pref_width</span>)
-        [<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_pref_width</span>(<span class="ruby-identifier">w</span>) }, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_pref_height</span>(<span class="ruby-identifier">h</span>) }]
-      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:set_width</span>)
-        [<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_width</span>(<span class="ruby-identifier">w</span>) }, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_height</span>(<span class="ruby-identifier">h</span>) }]
-      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:set_min_width</span>)
-        [<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_min_width</span>(<span class="ruby-identifier">w</span>) }, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_min_height</span>(<span class="ruby-identifier">h</span>) }]
-      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:set_max_width</span>)
-        [<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_min_width</span>(<span class="ruby-identifier">w</span>) }, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_min_height</span>(<span class="ruby-identifier">h</span>) }]
-      <span class="ruby-keyword">else</span>
-        [<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-node">&quot;CONTROL WIDTH #{w} UNSUPPORTED&quot;</span>)}, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-node">&quot;CONTROL HEIGHT #{h} UNSUPPORTED&quot;</span>)}]
-      <span class="ruby-keyword">end</span>
+                   <span class="ruby-keyword">if</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:set_fit_width</span>)
+                     [<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_fit_width</span>(<span class="ruby-identifier">w</span>) }, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_fit_height</span>(<span class="ruby-identifier">h</span>) }]
+                   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:set_pref_width</span>)
+                     [<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_pref_width</span>(<span class="ruby-identifier">w</span>) }, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_pref_height</span>(<span class="ruby-identifier">h</span>) }]
+                   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:set_width</span>)
+                     [<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_width</span>(<span class="ruby-identifier">w</span>) }, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_height</span>(<span class="ruby-identifier">h</span>) }]
+                   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:set_min_width</span>)
+                     [<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_min_width</span>(<span class="ruby-identifier">w</span>) }, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_min_height</span>(<span class="ruby-identifier">h</span>) }]
+                   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:set_max_width</span>)
+                     [<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_min_width</span>(<span class="ruby-identifier">w</span>) }, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_min_height</span>(<span class="ruby-identifier">h</span>) }]
+                   <span class="ruby-keyword">else</span>
+                     [<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-node">&quot;CONTROL WIDTH #{w} UNSUPPORTED&quot;</span>)}, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-node">&quot;CONTROL HEIGHT #{h} UNSUPPORTED&quot;</span>)}]
+                   <span class="ruby-keyword">end</span>
     <span class="ruby-identifier">set_dim_width</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">width</span>)
     <span class="ruby-identifier">set_dim_height</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">height</span>)
   <span class="ruby-keyword">end</span>
@@ -977,7 +1023,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="set_control_tooltip-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 73</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_control_tooltip</span>(<span class="ruby-identifier">c</span>, <span class="ruby-identifier">text</span> = <span class="ruby-string">&#39;&#39;</span>)
   <span class="ruby-identifier">c</span>.<span class="ruby-identifier">set_tooltip</span>(<span class="ruby-constant">Tooltip</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">text</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -1010,9 +1056,57 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="show_main_stage-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 308</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 339</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show_main_stage</span>
   <span class="ruby-identifier">app</span>.<span class="ruby-identifier">stage</span>.<span class="ruby-identifier">show</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-slider_create" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">slider_create</span><span
+            class="method-args">( opts = {}, &block)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="slider_create-source">
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 121</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">slider_create</span>( <span class="ruby-identifier">opts</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">params</span> = {
+    <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
+    <span class="ruby-value">:y</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
+    <span class="ruby-value">:min</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
+    <span class="ruby-value">:max</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">100</span>,
+    <span class="ruby-value">:position</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
+    <span class="ruby-value">:fit_width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">100</span>,
+    <span class="ruby-comment">#:fit_height =&gt; 100,</span>
+    <span class="ruby-value">:parent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>
+  }.<span class="ruby-identifier">deep_merge</span>(<span class="ruby-identifier">opts</span>)
+  <span class="ruby-identifier">c</span> = <span class="ruby-constant">Slider</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:min</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:max</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:position</span>])
+  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">relocate</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:x</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:y</span>])
+  <span class="ruby-identifier">set_control_dimension</span>(<span class="ruby-identifier">c</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:fit_width</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:fit_height</span>])
+  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">value_property</span>.<span class="ruby-identifier">add_listener</span>(<span class="ruby-identifier">block</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+  <span class="ruby-identifier">control_add</span>(<span class="ruby-identifier">c</span>, <span class="ruby-value">:parent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:parent</span>], <span class="ruby-value">:bounds</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">c</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1043,7 +1137,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="text_area_create-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 200</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 231</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">text_area_create</span>(<span class="ruby-identifier">opts</span> = {})
   <span class="ruby-identifier">params</span> = {
     <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
@@ -1087,7 +1181,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="text_field_create-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 152</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 183</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">text_field_create</span>(<span class="ruby-identifier">opts</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">action</span>)
   <span class="ruby-identifier">params</span> = {
     <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
@@ -1132,7 +1226,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="web_engine_create-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 324</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 355</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">web_engine_create</span>(<span class="ruby-identifier">url</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">opts</span> = {})
   <span class="ruby-identifier">params</span> = {
     <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
@@ -1180,7 +1274,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="window_create-source">
-            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 283</span>
+            <pre><span class="ruby-comment"># File javafx_helpers.rb, line 314</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">window_create</span>(<span class="ruby-identifier">caption</span>, <span class="ruby-identifier">opts</span> = {})
   <span class="ruby-identifier">params</span> = {
     <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
@@ -1219,7 +1313,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.1.
+  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

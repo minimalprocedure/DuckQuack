@@ -61,7 +61,7 @@ substitutions:
   '\bmentre\b': while
   '\brendi\b': yield
 
-  
+
 methods:
 
   http_get: richiesta_http
@@ -115,6 +115,11 @@ methods:
 
   print_canvas: scrivi
 
+  material_create: nuovo_materiale
+  sphere_create: nuova_sfera
+  box_create: nuovo_cubo
+  cylinder_create: nuovo_cilindro
+  group_objects: raggruppa_oggetti
   html_editor_create: nuovo_html_editor
   get_screen_bounds: limiti_schermo
   progress_bar_create: nuova_barra_di_progresso
@@ -138,6 +143,7 @@ methods:
   control_add: aggiungi_controllo
   image_view_create: mostra_immagine
   button_create: nuovo_bottone
+  slider_create: nuovo_cursore
   label_create: nuova_etichetta
   text_field_create: nuovo_campo_di_testo
   text_area_create: nuova_area_di_testo
