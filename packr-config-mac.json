@@ -25,7 +25,7 @@
       "VERSION"
     ],
     "minimizejre": "none",
-    "output": "./build/DuckQuack-macosx"
+    "output": "./build/DuckQuack-macosx.app"
 }
 
 

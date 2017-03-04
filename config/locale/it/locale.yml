@@ -116,6 +116,7 @@ methods:
   print_canvas: scrivi
 
   material_create: nuovo_materiale
+  mesh_create: carica_modello_3d
   sphere_create: nuova_sfera
   box_create: nuovo_cubo
   cylinder_create: nuovo_cilindro

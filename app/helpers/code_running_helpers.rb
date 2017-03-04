@@ -56,6 +56,9 @@ import javafx.scene.paint.PhongMaterial
 import javafx.scene.PerspectiveCamera
 import javafx.scene.control.Slider
 import javafx.scene.transform.Rotate
+import javafx.scene.SubScene
+import javafx.scene.shape.DrawMode
+import javafx.scene.shape.CullFace
 
 module CodeRunningHelpers
 
