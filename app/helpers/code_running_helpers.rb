@@ -62,7 +62,10 @@ import javafx.scene.shape.CullFace
 
 module CodeRunningHelpers
 
-  Dir[File.join(app.configs[:path][:helpers], 'modules', '*.rb')].sort.each { |m|
+  PATH_MODULES = File.join(app.configs[:path][:helpers], 'modules')
+  $LOAD_PATH << PATH_MODULES unless $LOAD_PATH.include?(PATH_MODULES)
+
+  Dir[File.join(PATH_MODULES, '*.rb')].sort.each { |m|
     require(m)
     name = File.basename(m).slice(0..-4)
     include const_get(name.modulize)

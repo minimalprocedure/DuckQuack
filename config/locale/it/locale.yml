@@ -99,6 +99,11 @@ methods:
   left: sinistra
   axis: assi
 
+  create_music_player: esecutore_musicale
+  create_music_patterns: spartito_musicale
+  create_music_rhythms: ritmo_musicale
+  replacement_preprocessor: sostituzioni_spartito
+
   task: compito
   task_run: esegui_compito
   task_later: compito_ritardato

@@ -64,15 +64,15 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-box_create">#box_create</a>
+    <li ><a href="#method-i-rotate2d">#rotate2d</a>
     
-    <li ><a href="#method-i-cylinder_create">#cylinder_create</a>
+    <li ><a href="#method-i-rotate2d_p">#rotate2d_p</a>
     
-    <li ><a href="#method-i-material_create">#material_create</a>
+    <li ><a href="#method-i-rotate_x">#rotate_x</a>
     
-    <li ><a href="#method-i-mesh_reset">#mesh_reset</a>
+    <li ><a href="#method-i-rotate_y">#rotate_y</a>
     
-    <li ><a href="#method-i-sphere_create">#sphere_create</a>
+    <li ><a href="#method-i-rotate_z">#rotate_z</a>
     
   </ul>
 </div>
@@ -113,11 +113,11 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
        </header>
 
     
-      <div id="method-i-box_create" class="method-detail ">
+      <div id="method-i-rotate2d" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">box_create</span><span
-            class="method-args">(dim_z, dim_y, dim_x, opts = {})</span>
+          <span class="method-name">rotate2d</span><span
+            class="method-args">(angle)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -131,21 +131,10 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
           
 
           
-          <div class="method-source-code" id="box_create-source">
-            <pre><span class="ruby-comment"># File mesh3d_helpers.rb, line 20</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">box_create</span>(<span class="ruby-identifier">dim_z</span>, <span class="ruby-identifier">dim_y</span>, <span class="ruby-identifier">dim_x</span>, <span class="ruby-identifier">opts</span> = {})
-  <span class="ruby-identifier">params</span> = {
-    <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
-    <span class="ruby-value">:y</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
-    <span class="ruby-value">:z</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
-    <span class="ruby-value">:material</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>,
-    <span class="ruby-value">:parent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>
-  }.<span class="ruby-identifier">deep_merge</span>(<span class="ruby-identifier">opts</span>)
-  <span class="ruby-identifier">c</span> = <span class="ruby-constant">Box</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dim_z</span>, <span class="ruby-identifier">dim_y</span>, <span class="ruby-identifier">dim_x</span>)
-  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">setMaterial</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:material</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:material</span>]
-  <span class="ruby-identifier">mesh_reset</span>(<span class="ruby-identifier">c</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:x</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:y</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:z</span>], <span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>)
-  <span class="ruby-identifier">control_add</span>(<span class="ruby-identifier">c</span>, <span class="ruby-value">:parent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:parent</span>], <span class="ruby-value">:bounds</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>)
-  <span class="ruby-identifier">c</span>
+          <div class="method-source-code" id="rotate2d-source">
+            <pre><span class="ruby-comment"># File mesh3d_helpers.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">rotate2d</span>(<span class="ruby-identifier">angle</span>)
+  <span class="ruby-identifier">getTransforms</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">Rotate</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">angle</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -157,11 +146,11 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
       </div>
 
     
-      <div id="method-i-cylinder_create" class="method-detail ">
+      <div id="method-i-rotate2d_p" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">cylinder_create</span><span
-            class="method-args">(radius, height, division, opts = {})</span>
+          <span class="method-name">rotate2d_p</span><span
+            class="method-args">(angle, pivot_x = 0, pivot_y = 0)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -175,21 +164,10 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
           
 
           
-          <div class="method-source-code" id="cylinder_create-source">
-            <pre><span class="ruby-comment"># File mesh3d_helpers.rb, line 50</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">cylinder_create</span>(<span class="ruby-identifier">radius</span>, <span class="ruby-identifier">height</span>, <span class="ruby-identifier">division</span>, <span class="ruby-identifier">opts</span> = {})
-  <span class="ruby-identifier">params</span> = {
-    <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
-    <span class="ruby-value">:y</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
-    <span class="ruby-value">:z</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
-    <span class="ruby-value">:material</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>,
-    <span class="ruby-value">:parent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>
-  }.<span class="ruby-identifier">deep_merge</span>(<span class="ruby-identifier">opts</span>)
-  <span class="ruby-identifier">c</span> = <span class="ruby-constant">Cylinder</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">radius</span>, <span class="ruby-identifier">height</span>, <span class="ruby-identifier">division</span>)
-  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">setMaterial</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:material</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:material</span>]
-  <span class="ruby-identifier">mesh_reset</span>(<span class="ruby-identifier">c</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:x</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:y</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:z</span>], <span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>)
-  <span class="ruby-identifier">control_add</span>(<span class="ruby-identifier">c</span>, <span class="ruby-value">:parent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:parent</span>], <span class="ruby-value">:bounds</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>)
-  <span class="ruby-identifier">c</span>
+          <div class="method-source-code" id="rotate2d_p-source">
+            <pre><span class="ruby-comment"># File mesh3d_helpers.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">rotate2d_p</span>(<span class="ruby-identifier">angle</span>, <span class="ruby-identifier">pivot_x</span> = <span class="ruby-value">0</span>, <span class="ruby-identifier">pivot_y</span> = <span class="ruby-value">0</span>)
+  <span class="ruby-identifier">getTransforms</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">Rotate</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">angle</span>, <span class="ruby-identifier">pivot_x</span>, <span class="ruby-identifier">pivot_y</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -201,11 +179,11 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
       </div>
 
     
-      <div id="method-i-material_create" class="method-detail ">
+      <div id="method-i-rotate_x" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">material_create</span><span
-            class="method-args">(opts = {})</span>
+          <span class="method-name">rotate_x</span><span
+            class="method-args">(angle, pivot_x = 0, pivot_y = 0, pivot_z = 0)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -219,26 +197,11 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
           
 
           
-          <div class="method-source-code" id="material_create-source">
-            <pre><span class="ruby-comment"># File mesh3d_helpers.rb, line 65</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">material_create</span>(<span class="ruby-identifier">opts</span> = {})
-  <span class="ruby-identifier">params</span> = {
-    <span class="ruby-value">:diffuse_color</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Color</span><span class="ruby-operator">::</span><span class="ruby-constant">WHITE</span>,
-    <span class="ruby-value">:bump_map</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>,
-    <span class="ruby-value">:diffuse_map</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>,
-    <span class="ruby-value">:illumination_map</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>,
-    <span class="ruby-value">:specular_map</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>,
-    <span class="ruby-value">:specular_color</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>,
-    <span class="ruby-value">:specular_power</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">32.0</span>
-  }.<span class="ruby-identifier">deep_merge</span>(<span class="ruby-identifier">opts</span>)
-  <span class="ruby-identifier">m</span> = <span class="ruby-constant">PhongMaterial</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">m</span>.<span class="ruby-identifier">set_diffuse_color</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:diffuse_color</span>])
-  <span class="ruby-identifier">m</span>.<span class="ruby-identifier">set_bump_map</span>(<span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:bump_map</span>])) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:bump_map</span>]
-  <span class="ruby-identifier">m</span>.<span class="ruby-identifier">set_diffuse_map</span>(<span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:diffuse_map</span>])) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:diffuse_map</span>]
-  <span class="ruby-identifier">m</span>.<span class="ruby-identifier">set_self_illumination_map</span>(<span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:illumination_map</span>])) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:illumination_map</span>]
-  <span class="ruby-identifier">m</span>.<span class="ruby-identifier">set_specular_color</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:specular_color</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:specular_color</span>]
-  <span class="ruby-identifier">m</span>.<span class="ruby-identifier">set_specular_power</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:specular_power</span>])
-  <span class="ruby-identifier">m</span>
+          <div class="method-source-code" id="rotate_x-source">
+            <pre><span class="ruby-comment"># File mesh3d_helpers.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">rotate_x</span>(<span class="ruby-identifier">angle</span>, <span class="ruby-identifier">pivot_x</span> = <span class="ruby-value">0</span>, <span class="ruby-identifier">pivot_y</span> = <span class="ruby-value">0</span>, <span class="ruby-identifier">pivot_z</span> = <span class="ruby-value">0</span>)
+  <span class="ruby-identifier">getTransforms</span>.<span class="ruby-identifier">add</span>(
+    <span class="ruby-constant">Rotate</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">angle</span>, <span class="ruby-identifier">pivot_x</span>, <span class="ruby-identifier">pivot_y</span>, <span class="ruby-identifier">pivot_z</span>, <span class="ruby-constant">Rotate</span><span class="ruby-operator">::</span><span class="ruby-constant">X_AXIS</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -250,11 +213,11 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
       </div>
 
     
-      <div id="method-i-mesh_reset" class="method-detail ">
+      <div id="method-i-rotate_y" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">mesh_reset</span><span
-            class="method-args">(mesh, x, y, z, rot_x, rot_y, rot_z)</span>
+          <span class="method-name">rotate_y</span><span
+            class="method-args">(angle, pivot_x = 0, pivot_y = 0, pivot_z = 0)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -268,16 +231,11 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
           
 
           
-          <div class="method-source-code" id="mesh_reset-source">
-            <pre><span class="ruby-comment"># File mesh3d_helpers.rb, line 10</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">mesh_reset</span>(<span class="ruby-identifier">mesh</span>, <span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>, <span class="ruby-identifier">z</span>, <span class="ruby-identifier">rot_x</span>, <span class="ruby-identifier">rot_y</span>, <span class="ruby-identifier">rot_z</span>)
-  <span class="ruby-identifier">mesh</span>.<span class="ruby-identifier">setTranslateX</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-identifier">mesh</span>.<span class="ruby-identifier">setTranslateY</span>(<span class="ruby-identifier">y</span>)
-  <span class="ruby-identifier">mesh</span>.<span class="ruby-identifier">setTranslateZ</span>(<span class="ruby-identifier">z</span>)
-  <span class="ruby-identifier">mesh</span>.<span class="ruby-identifier">getTransforms</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">Rotate</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">rot_x</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-constant">Rotate</span><span class="ruby-operator">::</span><span class="ruby-constant">X_AXIS</span>))
-  <span class="ruby-identifier">mesh</span>.<span class="ruby-identifier">getTransforms</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">Rotate</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">rot_y</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-constant">Rotate</span><span class="ruby-operator">::</span><span class="ruby-constant">Y_AXIS</span>))
-  <span class="ruby-identifier">mesh</span>.<span class="ruby-identifier">getTransforms</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">Rotate</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">rot_z</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-constant">Rotate</span><span class="ruby-operator">::</span><span class="ruby-constant">Z_AXIS</span>))
-  <span class="ruby-identifier">mesh</span>
+          <div class="method-source-code" id="rotate_y-source">
+            <pre><span class="ruby-comment"># File mesh3d_helpers.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">rotate_y</span>(<span class="ruby-identifier">angle</span>, <span class="ruby-identifier">pivot_x</span> = <span class="ruby-value">0</span>, <span class="ruby-identifier">pivot_y</span> = <span class="ruby-value">0</span>, <span class="ruby-identifier">pivot_z</span> = <span class="ruby-value">0</span>)
+  <span class="ruby-identifier">getTransforms</span>.<span class="ruby-identifier">add</span>(
+    <span class="ruby-constant">Rotate</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">angle</span>, <span class="ruby-identifier">pivot_x</span>, <span class="ruby-identifier">pivot_y</span>, <span class="ruby-identifier">pivot_z</span>, <span class="ruby-constant">Rotate</span><span class="ruby-operator">::</span><span class="ruby-constant">Y_AXIS</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -289,11 +247,11 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
       </div>
 
     
-      <div id="method-i-sphere_create" class="method-detail ">
+      <div id="method-i-rotate_z" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">sphere_create</span><span
-            class="method-args">(radius, division, opts = {})</span>
+          <span class="method-name">rotate_z</span><span
+            class="method-args">(angle, pivot_x = 0, pivot_y = 0, pivot_z = 0)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -307,21 +265,11 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
           
 
           
-          <div class="method-source-code" id="sphere_create-source">
-            <pre><span class="ruby-comment"># File mesh3d_helpers.rb, line 35</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">sphere_create</span>(<span class="ruby-identifier">radius</span>, <span class="ruby-identifier">division</span>, <span class="ruby-identifier">opts</span> = {})
-  <span class="ruby-identifier">params</span> = {
-    <span class="ruby-value">:x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
-    <span class="ruby-value">:y</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
-    <span class="ruby-value">:z</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>,
-    <span class="ruby-value">:material</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>,
-    <span class="ruby-value">:parent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>
-  }.<span class="ruby-identifier">deep_merge</span>(<span class="ruby-identifier">opts</span>)
-  <span class="ruby-identifier">c</span> = <span class="ruby-constant">Sphere</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">radius</span>, <span class="ruby-identifier">division</span>)
-  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">setMaterial</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:material</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:material</span>]
-  <span class="ruby-identifier">mesh_reset</span>(<span class="ruby-identifier">c</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:x</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:y</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:z</span>], <span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>)
-  <span class="ruby-identifier">control_add</span>(<span class="ruby-identifier">c</span>, <span class="ruby-value">:parent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:parent</span>], <span class="ruby-value">:bounds</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>)
-  <span class="ruby-identifier">c</span>
+          <div class="method-source-code" id="rotate_z-source">
+            <pre><span class="ruby-comment"># File mesh3d_helpers.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">rotate_z</span>(<span class="ruby-identifier">angle</span>, <span class="ruby-identifier">pivot_x</span> = <span class="ruby-value">0</span>, <span class="ruby-identifier">pivot_y</span> = <span class="ruby-value">0</span>, <span class="ruby-identifier">pivot_z</span> = <span class="ruby-value">0</span>)
+  <span class="ruby-identifier">getTransforms</span>.<span class="ruby-identifier">add</span>(
+    <span class="ruby-constant">Rotate</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">angle</span>, <span class="ruby-identifier">pivot_x</span>, <span class="ruby-identifier">pivot_y</span>, <span class="ruby-identifier">pivot_z</span>, <span class="ruby-constant">Rotate</span><span class="ruby-operator">::</span><span class="ruby-constant">Z_AXIS</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
