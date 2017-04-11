@@ -8,38 +8,49 @@
 
 module UtilsHelpers
 
-  
+  #
+  # Simple benchmarks for execution blocks
+  def benchmark(&f)
+    start = Time.now
+    yield
+    stop = Time.now
+    puts ""
+    puts ">>> Execution time: #{stop - start}s"
+    puts ""
+  end
+
+
   ##
   #Clear output window.
-  
+
   def clear_output
     Platform.runLater(-> { @output.set_text('') })
   end
 
   ##
   # Append text to output window.
-  
+
   def print(text)
     Platform.runLater(-> { @output.append_text(text.to_s) })
   end
 
   ##
   # Append text to output window with carriage return.
-  
+
   def println(text)
     Platform.runLater(-> { @output.append_text("#{text.to_s}\n") })
   end
 
   ##
   # Send the signal **TERM** to process. If not inferior process running close the application.
-  
-  def kill_term   
-    Process.kill('TERM', Process.pid) 
+
+  def kill_term
+    Process.kill('TERM', Process.pid)
   end
 
   ##
   # Send the signal **INT** to process. If not inferior process running close the application.
-  
+
   def kill_int
     Process.kill("INT", Process.pid)
   end

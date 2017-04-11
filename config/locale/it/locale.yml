@@ -64,6 +64,7 @@ substitutions:
 
 methods:
 
+  benchmark: profila
   http_get: richiesta_http
   repeat: ripeti
   repeat_while: ripeti_mentre

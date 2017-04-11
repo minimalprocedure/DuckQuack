@@ -64,6 +64,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-benchmark">#benchmark</a>
+    
     <li ><a href="#method-i-clear_output">#clear_output</a>
     
     <li ><a href="#method-i-disable_kills">#disable_kills</a>
@@ -117,6 +119,44 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
        </header>
 
     
+      <div id="method-i-benchmark" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">benchmark</span><span
+            class="method-args">() { || ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Simple benchmarks for execution blocks</p>
+          
+          
+
+          
+          <div class="method-source-code" id="benchmark-source">
+            <pre><span class="ruby-comment"># File utils_helpers.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">benchmark</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">f</span>)
+  <span class="ruby-identifier">start</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+  <span class="ruby-keyword">yield</span>
+  <span class="ruby-identifier">stop</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;&gt;&gt;&gt; Execution time: #{stop - start}s&quot;</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-clear_output" class="method-detail ">
         
         <div class="method-heading">
@@ -136,7 +176,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="clear_output-source">
-            <pre><span class="ruby-comment"># File utils_helpers.rb, line 14</span>
+            <pre><span class="ruby-comment"># File utils_helpers.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">clear_output</span>
   <span class="ruby-constant">Platform</span>.<span class="ruby-identifier">runLater</span>(<span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span> { <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">set_text</span>(<span class="ruby-string">&#39;&#39;</span>) })
 <span class="ruby-keyword">end</span></pre>
@@ -169,7 +209,7 @@ href="http://www.apache.org/licenses">www.apache.org/licenses</a>/</p>
 
           
           <div class="method-source-code" id="disable_kills-source">
-            <pre><span class="ruby-comment"># File utils_helpers.rb, line 57</span>
+            <pre><span class="ruby-comment"># File utils_helpers.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">disable_kills</span>
   <span class="ruby-identifier">app</span>.<span class="ruby-identifier">main_controller</span>.<span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-value">:@kill_int_button</span>).<span class="ruby-identifier">disable</span> = <span class="ruby-keyword">true</span>
   <span class="ruby-identifier">app</span>.<span class="ruby-identifier">main_controller</span>.<span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-value">:@kill_term_button</span>).<span class="ruby-identifier">disable</span> = <span class="ruby-keyword">true</span>
@@ -204,7 +244,7 @@ the application.</p>
 
           
           <div class="method-source-code" id="enable_kills-source">
-            <pre><span class="ruby-comment"># File utils_helpers.rb, line 49</span>
+            <pre><span class="ruby-comment"># File utils_helpers.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">enable_kills</span>
   <span class="ruby-identifier">app</span>.<span class="ruby-identifier">main_controller</span>.<span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-value">:@kill_int_button</span>).<span class="ruby-identifier">disable</span> = <span class="ruby-keyword">false</span>
   <span class="ruby-identifier">app</span>.<span class="ruby-identifier">main_controller</span>.<span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-value">:@kill_term_button</span>).<span class="ruby-identifier">disable</span> = <span class="ruby-keyword">false</span>
@@ -239,7 +279,7 @@ running close the application.</p>
 
           
           <div class="method-source-code" id="kill_int-source">
-            <pre><span class="ruby-comment"># File utils_helpers.rb, line 42</span>
+            <pre><span class="ruby-comment"># File utils_helpers.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">kill_int</span>
   <span class="ruby-constant">Process</span>.<span class="ruby-identifier">kill</span>(<span class="ruby-string">&quot;INT&quot;</span>, <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -273,9 +313,9 @@ running close the application.</p>
 
           
           <div class="method-source-code" id="kill_term-source">
-            <pre><span class="ruby-comment"># File utils_helpers.rb, line 35</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">kill_term</span>   
-  <span class="ruby-constant">Process</span>.<span class="ruby-identifier">kill</span>(<span class="ruby-string">&#39;TERM&#39;</span>, <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>) 
+            <pre><span class="ruby-comment"># File utils_helpers.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">kill_term</span>
+  <span class="ruby-constant">Process</span>.<span class="ruby-identifier">kill</span>(<span class="ruby-string">&#39;TERM&#39;</span>, <span class="ruby-constant">Process</span>.<span class="ruby-identifier">pid</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -306,7 +346,7 @@ running close the application.</p>
 
           
           <div class="method-source-code" id="print-source">
-            <pre><span class="ruby-comment"># File utils_helpers.rb, line 21</span>
+            <pre><span class="ruby-comment"># File utils_helpers.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">print</span>(<span class="ruby-identifier">text</span>)
   <span class="ruby-constant">Platform</span>.<span class="ruby-identifier">runLater</span>(<span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span> { <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">append_text</span>(<span class="ruby-identifier">text</span>.<span class="ruby-identifier">to_s</span>) })
 <span class="ruby-keyword">end</span></pre>
@@ -339,7 +379,7 @@ running close the application.</p>
 
           
           <div class="method-source-code" id="println-source">
-            <pre><span class="ruby-comment"># File utils_helpers.rb, line 28</span>
+            <pre><span class="ruby-comment"># File utils_helpers.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">println</span>(<span class="ruby-identifier">text</span>)
   <span class="ruby-constant">Platform</span>.<span class="ruby-identifier">runLater</span>(<span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span> { <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">append_text</span>(<span class="ruby-node">&quot;#{text.to_s}\n&quot;</span>) })
 <span class="ruby-keyword">end</span></pre>
