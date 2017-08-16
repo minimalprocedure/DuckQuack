@@ -17,7 +17,6 @@ closePath
 setFill(Color.rgb(255,0,255))
 fill
 
-
 pulisci
 
 println "SCRIVO NELLA FINESTRA DI OUTPUT"
@@ -54,7 +53,7 @@ COSTANTE = 1
 
 simbolo = :pippo
 
-scrivi("SCRIVO NEL CANVAS", 200, 400)
+scrivi("SCRIVO NEL CANVAS", x: 200, y: 400) 
 
 linea(340, 100, 10, 300, 4, Color::GREEN)
 linea(340, 100, 50, 300, 4, Color::RED)

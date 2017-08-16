@@ -10,7 +10,7 @@
 # DuckQuack Initializations
 ################################################################################
 
-APP_VERSION="0.7.9.beta"
+APP_VERSION="0.7.10.beta"
 
 include Java
 import java.lang.System
@@ -23,11 +23,7 @@ RUN_PATH = System.getProperty("user.dir")
 ENV['APP_ENV'] ||= 'development'
 ENV['RACK_ENV'] ||= 'development'
 
-IS_IN_JAR = Pathname.new(
-  File.expand_path(
-    File.join(
-      File.dirname(__FILE__), ".."))).realpath.to_s == "classpath:/"
-
+IS_IN_JAR = File.dirname(__FILE__) == "classpath:/"
 if IS_IN_JAR
   ENV['APP_ENV'] = 'production'
   ENV['RACK_ENV'] = 'production'

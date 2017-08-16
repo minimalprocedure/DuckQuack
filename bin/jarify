@@ -1,6 +1,6 @@
 #!/bin/sh
 
-JRUBY_VERSION=9.1.6.0
+JRUBY_VERSION=9.1.12.0
 JRUBY=jruby-complete-$JRUBY_VERSION.jar
 DOWNLOAD_PATH=http://jruby.org.s3.amazonaws.com/downloads/$JRUBY_VERSION/$JRUBY
 
