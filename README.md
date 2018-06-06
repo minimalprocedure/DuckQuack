@@ -1,4 +1,2 @@
-DuckQuack
-===
-
-this project has migrated to gitlab: https://gitlab.com/minimalprocedure/DuckQuack
+this project has migrated to gitlab.
+Same url but on gitlab.com insted github.com
